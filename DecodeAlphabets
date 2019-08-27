@@ -1,0 +1,30 @@
+class DecodeAlphabets {
+    int total=0;
+    public int numDecodings(String s) {
+        if(s==null || s.length()==0){
+           return 0;
+        }
+        int[] arr=new int[s.length()];
+        int i=0;
+        for(String ts : s.split("")){
+            arr[i]=Integer.parseInt(ts);
+            i++;
+        }
+        solve(arr,0);
+        return total;
+    }
+    
+    
+    public void solve(int[] arr, int cur){
+        
+        if(cur==arr.length)
+            total++;
+        else{
+            if(arr[cur]==0)
+                return;
+            if(cur!=arr.length-1 && (arr[cur]*10+arr[cur+1]<=26))
+                solve(arr, cur+2);
+            solve(arr,cur+1);
+        }
+    }
+}
